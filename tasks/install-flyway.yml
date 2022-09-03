@@ -1,0 +1,11 @@
+- name: "Check if flyway is installed"
+  ansible.builtin.shell:
+    cmd: "flyway -v"
+  register: flyway_installed_check
+  ignore_errors: yes
+
+- name: "Install flyway"
+  ansible.builtin.shell:
+    cmd: "wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/{{flyway_version}}/flyway-commandline-{{flyway_version}}-linux-x64.tar.gz | tar xvz && ln -s `pwd`/flyway-{{flyway_version}}/flyway /usr/local/bin"
+  when: flyway_installed_check.stdout.find(flyway_version) == -1
+  become: yes

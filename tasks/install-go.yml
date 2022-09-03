@@ -1,0 +1,22 @@
+- name: "Check if go is installed"
+  ansible.builtin.shell:
+    cmd: "/usr/local/go/bin/go version"
+  args:
+    executable: /bin/zsh
+  register: go_installed
+  ignore_errors: yes
+
+- block:
+    - name: "Install golang"
+      ansible.builtin.shell:
+        cmd: "wget -qO- https://golang.org/dl/go{{go_version}}.linux-amd64.tar.gz | tar xvz && mv go /usr/local"
+      become: yes
+
+    - name: "Add golang to path"
+      ansible.builtin.lineinfile:
+        path: ~/.zshrc
+        line: "export PATH=$PATH:/usr/local/go/bin"
+        state: present
+        create: yes
+      become_user: "{{ ansible_user }}"
+  when: go_installed.stdout.find(go_version) == -1
