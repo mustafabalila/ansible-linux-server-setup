@@ -1,0 +1,4 @@
+node_version: 16
+go_version: 1.17.2
+flyway_version: 9.2.2
+login_user: root
