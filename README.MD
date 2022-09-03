@@ -19,9 +19,9 @@ git clone
 
 - Edit the [playbook.yml](./playbook.yml) file to your needs
 
-- Edit the [host_vars/server-1.yml](./host_vars/server-1.yml) with your VM IP.
+- Edit the [inventory/host_vars/server-1.yml](./inventory/host_vars/server-1.yml) with your VM IP.
 
-- Edit the [group_vars/web.yml](./group_vars/web.yml) with your VM ssh user and local keys.
+- Edit the [inventory/group_vars/web.yml](./inventory/group_vars/web.yml) with your VM ssh user and local keys.
 
 - Run the playbook
 
